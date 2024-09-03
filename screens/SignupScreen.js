@@ -7,7 +7,15 @@ function SignupScreen() {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   async function signupHandler({ email, password }) {
     setIsAuthenticating(true);
-    await createUser(email, password);
+    try {
+      await createUser(email, password);
+    } catch (error) {
+      Alert.alert(
+        "Authentication failed",
+        "Could not create user, please check your input and try again later."
+      );
+    }
+
     setIsAuthenticating(false);
   }
 
